@@ -1,0 +1,16 @@
+﻿namespace Rystrap.Enums
+{
+    public enum BootstrapperStyle
+    {
+        VistaDialog,
+        LegacyDialog2008,
+        LegacyDialog2011,
+        ProgressDialog,
+        ClassicFluentDialog,
+        ByfronDialog,
+        [EnumName(StaticName = "Rystrap")]
+        FluentDialog,
+        FluentAeroDialog,
+        CustomDialog
+    }
+}

@@ -1,0 +1,80 @@
+﻿<base:WpfUiWindow x:Class="Rystrap.UI.Elements.Dialogs.RystrapInfoDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:base="clr-namespace:Rystrap.UI.Elements.Base"
+        xmlns:local="clr-namespace:Rystrap"
+        Title="Welcome to Rystrap"
+        Width="520" SizeToContent="Height"
+        MinWidth="520"
+        ResizeMode="NoResize"
+        RenderOptions.BitmapScalingMode="HighQuality"
+        Background="{ui:ThemeResource ApplicationBackgroundBrush}"
+        ExtendsContentIntoTitleBar="True"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Icon + Title -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
+            <Image x:Name="AppIcon" Width="48" Height="48" Margin="0,0,12,0" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" />
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Rystrap" FontSize="24" FontWeight="Bold" />
+                <TextBlock Text="{x:Static local:App.Version}" FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Description -->
+        <TextBlock Grid.Row="1" Text="An open-source Roblox bootstrapper that replaces the default Roblox launcher with enhanced features and customization."
+                   FontSize="13" TextWrapping="Wrap" Margin="0,0,0,16" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+        <!-- Features -->
+        <ui:CardControl Grid.Row="2" Icon="WrenchScrewdriver20" Margin="0,0,0,6">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock Text="Better Mods" FontWeight="SemiBold" FontSize="13" />
+                    <TextBlock Text="Customize cursors, sounds, textures, fonts, animations and UI with a built-in mod manager" FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}" TextWrapping="Wrap" />
+                </StackPanel>
+            </ui:CardControl.Header>
+        </ui:CardControl>
+
+        <ui:CardControl Grid.Row="3" Icon="PaintBrush24" Margin="0,0,0,6">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock Text="Custom Themes" FontWeight="SemiBold" FontSize="13" />
+                    <TextBlock Text="Personalize the bootstrapper with custom themes and appearance settings" FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}" TextWrapping="Wrap" />
+                </StackPanel>
+            </ui:CardControl.Header>
+        </ui:CardControl>
+
+        <ui:CardControl Grid.Row="4" Icon="Flag24" Margin="0,0,0,6">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock Text="Fast Flags Editor" FontWeight="SemiBold" FontSize="13" />
+                    <TextBlock Text="Tweak Roblox engine settings for better performance and visuals" FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}" TextWrapping="Wrap" />
+                </StackPanel>
+            </ui:CardControl.Header>
+        </ui:CardControl>
+
+        <ui:CardControl Grid.Row="5" Icon="Chat24" Margin="0,0,0,16">
+            <ui:CardControl.Header>
+                <StackPanel>
+                    <TextBlock Text="Discord Integration" FontWeight="SemiBold" FontSize="13" />
+                    <TextBlock Text="Rich presence support to show what you're playing on Discord" FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}" TextWrapping="Wrap" />
+                </StackPanel>
+            </ui:CardControl.Header>
+        </ui:CardControl>
+
+        <!-- Get Started Button -->
+        <ui:Button Grid.Row="6" Content="Get Started" Appearance="Primary" HorizontalAlignment="Center"
+                   MinWidth="140" Padding="16,8" FontSize="14" Click="OnGetStartedClick" IsDefault="True" />
+    </Grid>
+</base:WpfUiWindow>
