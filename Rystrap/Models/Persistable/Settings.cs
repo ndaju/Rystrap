@@ -25,6 +25,7 @@ namespace Rystrap.Models.Persistable
         public string? SelectedCustomTheme { get; set; } = null;
         public WebEnvironment WebEnvironment { get; set; } = WebEnvironment.Production;
         public string? SkippedUpdateVersion { get; set; } = null;
+        public string? LastSeenWhatsNewVersion { get; set; } = null;
         public bool StartupPerformanceMode { get; set; } = false;
         public bool ProxyEnabled { get; set; } = false;
         public string ProxyAddress { get; set; } = "";

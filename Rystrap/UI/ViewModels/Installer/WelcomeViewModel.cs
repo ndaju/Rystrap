@@ -5,8 +5,7 @@
         // formatting is done here instead of in xaml, it's just a bit easier
         public string MainText => String.Format(
             Strings.Installer_Welcome_MainText,
-            "[github.com/Rystraplabs/Rystrap](https://github.com/Rystraplabs/Rystrap)",
-            "[Rystraplabs.com](https://Rystraplabs.com)"
+            "[github.com/ndaju/Rystrap](https://github.com/ndaju/Rystrap)"
         );
 
         public string VersionNotice { get; private set; } = "";

@@ -4,7 +4,7 @@ namespace Rystrap.Extensions
 {
     static class CustomThemeTemplateEx
     {
-        const string EXAMPLES_URL = "https://github.com/Rystraplabs/custom-bootstrapper-examples";
+        const string EXAMPLES_URL = "https://github.com/ndaju/Rystrap/wiki/custom-bootstrapper-examples";
 
         public static string GetFileName(this CustomThemeTemplate template)
         {

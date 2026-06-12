@@ -19,10 +19,10 @@ namespace Rystrap
         public const string ProjectName = "Rystrap";
 #endif
         public const string ProjectOwner = "Rystrap";
-        public const string ProjectRepository = "Rystraplabs/Rystrap";
-        public const string ProjectDownloadLink = "https://Rystraplabs.com";
-        public const string ProjectHelpLink = "https://Rystraplabs.com/wiki/help/";
-        public const string ProjectSupportLink = "https://github.com/Rystraplabs/Rystrap/issues/new";
+        public const string ProjectRepository = "ndaju/Rystrap";
+        public const string ProjectDownloadLink = "https://github.com/ndaju/Rystrap/releases/latest";
+        public const string ProjectHelpLink = "https://github.com/ndaju/Rystrap/issues";
+        public const string ProjectSupportLink = "https://github.com/ndaju/Rystrap/issues/new";
 
         public const string RobloxPlayerAppName = "RobloxPlayerBeta";
         public const string RobloxStudioAppName = "RobloxStudioBeta";
@@ -148,10 +148,10 @@ namespace Rystrap
         {
             // dont let user switch web environment if debug mode is not on
             if (Settings.Prop.WebEnvironment == WebEnvironment.Production || !Settings.Prop.DeveloperMode)
-                return "services.Rystraplabs.com";
+                return "";
 
             string? sub = Settings.Prop.WebEnvironment.GetDescription();
-            return $"services-{sub}.Rystraplabs.com";
+            return $"";
         }
 
         public static bool CanSendLogs()

@@ -24,7 +24,7 @@ namespace Rystrap.UI
 
             string info = String.Format(
                 Strings.Dialog_PlayerError_FailedLaunch,
-                $"https://Rystraplabs.com/wiki/help/roblox-crashes-or-does-not-launch/"
+                $"https://github.com/ndaju/Rystrap/issues"
             );
 
             ShowMessageBox(info, MessageBoxImage.Error);

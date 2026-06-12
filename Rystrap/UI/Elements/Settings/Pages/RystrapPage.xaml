@@ -25,7 +25,7 @@
 
         <controls:OptionControl 
             Header="{x:Static resources:Strings.Menu_Rystrap_Analytics_Title}"
-            Description="{Binding Source={x:Static resources:Strings.Menu_Rystrap_Analytics_Description}, Converter={StaticResource StringFormatConverter}, ConverterParameter='https://Rystraplabs.com/wiki/info/privacy-policy/'}">
+            Description="{Binding Source={x:Static resources:Strings.Menu_Rystrap_Analytics_Description}, Converter={StaticResource StringFormatConverter}, ConverterParameter='https://github.com/ndaju/Rystrap/wiki/privacy-policy'}">
             <ui:ToggleSwitch IsChecked="{Binding AnalyticsEnabled, Mode=TwoWay}" />
         </controls:OptionControl>
 

@@ -42,7 +42,7 @@ namespace Rystrap.UI.ViewModels.About
 
             try
             {
-                SupporterData = await Http.GetJson<SupporterData>("https://raw.githubusercontent.com/Rystraplabs/config/main/supporters.json");
+                SupporterData = await Http.GetJson<SupporterData>("https://raw.githubusercontent.com/ndaju/Rystrap/main/supporters.json");
             }
             catch (Exception ex)
             {

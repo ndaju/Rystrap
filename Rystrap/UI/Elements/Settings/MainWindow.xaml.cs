@@ -2,9 +2,11 @@
 using System.Windows;
 using System.Windows.Controls;
 
+using System.Windows.Threading;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
+using Rystrap.UI.Elements.Dialogs;
 using Rystrap.UI.ViewModels.Settings;
 
 namespace Rystrap.UI.Elements.Settings
@@ -33,6 +35,8 @@ namespace Rystrap.UI.Elements.Settings
                 ShowAlreadyRunningSnackbar();
 
             LoadState();
+
+            Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => WhatsNewDialog.ShowIfNew()));
         }
 
         public void LoadState()

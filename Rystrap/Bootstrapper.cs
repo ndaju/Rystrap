@@ -1562,7 +1562,7 @@ namespace Rystrap
 
                         Frontend.ShowConnectivityDialog(
                             Strings.Dialog_Connectivity_UnableToDownload,
-                            String.Format(Strings.Dialog_Connectivity_UnableToDownloadReason, "[https://Rystraplabs.com/wiki/help/Rystrap-cannot-download-roblox/](https://Rystraplabs.com/wiki/help/Rystrap-cannot-download-roblox/)"),
+                            String.Format(Strings.Dialog_Connectivity_UnableToDownloadReason, "[https://github.com/ndaju/Rystrap/issues](https://github.com/ndaju/Rystrap/issues)"),
                             MessageBoxImage.Error,
                             ex
                         );

@@ -8,6 +8,6 @@
         [JsonPropertyName("name")]
         public string Name { get; set; } = null!;
 
-        public string Image => $"https://raw.githubusercontent.com/Rystraplabs/config/main/assets/{ImageAsset}";
+        public string Image => $"https://raw.githubusercontent.com/ndaju/Rystrap/main/assets/{ImageAsset}";
     }
 }
