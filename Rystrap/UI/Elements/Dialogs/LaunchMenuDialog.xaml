@@ -58,9 +58,9 @@
             </Grid>
 
             <StackPanel Grid.Column="1" Margin="16">
-                <ui:CardAction TabIndex="0" Command="{Binding LaunchRobloxCommand, Mode=OneTime}">
+                <ui:CardAction Icon="XboxController24" TabIndex="0" Command="{Binding LaunchRobloxCommand, Mode=OneTime}">
                     <StackPanel>
-                        <TextBlock FontSize="14"><Run Text="🎮 " /><Run Text="{x:Static resources:Strings.LaunchMenu_LaunchRoblox}" /></TextBlock>
+                        <TextBlock FontSize="14" Text="{x:Static resources:Strings.LaunchMenu_LaunchRoblox}" />
                     </StackPanel>
                 </ui:CardAction>
 
