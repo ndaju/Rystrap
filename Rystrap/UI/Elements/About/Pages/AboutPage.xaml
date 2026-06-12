@@ -96,7 +96,20 @@
 
             <controls:Expander Grid.Column="0" Margin="0,0,4,0" HeaderIcon="Code24" HeaderText="{x:Static resources:Strings.Menu_About_Contributors_Code}" IsExpanded="True">
                 <StackPanel>
-                    <controls:MarkdownTextBlock MarkdownText="[ndaju](https://github.com/ndaju)" />
+                    <controls:MarkdownTextBlock MarkdownText="[ndaju](https://github.com/ndaju) — active developer" />
+                    <controls:MarkdownTextBlock MarkdownText="[pizzaboxer](https://github.com/pizzaboxer)" />
+                    <controls:MarkdownTextBlock MarkdownText="[Matt](https://github.com/bluepilledgreat)" />
+                    <controls:MarkdownTextBlock MarkdownText="[lolmanurfunny](https://github.com/lolmanurfunny)" />
+                    <controls:MarkdownTextBlock MarkdownText="[1011025m](https://github.com/1011025m)" />
+                    <controls:MarkdownTextBlock MarkdownText="[EasternBloxxer](https://github.com/EasternBloxxer)" />
+                    <controls:MarkdownTextBlock MarkdownText="[sitiom](https://github.com/sitiom)" />
+                    <controls:MarkdownTextBlock MarkdownText="[Extravi](https://github.com/Extravi)" />
+                    <controls:MarkdownTextBlock MarkdownText="[EpixScripts](https://github.com/EpixScripts)" />
+                    <controls:MarkdownTextBlock MarkdownText="[swatTurret](https://github.com/swatTurret)" />
+                    <controls:MarkdownTextBlock MarkdownText="[fxeP1](https://github.com/fxeP1)" />
+                    <controls:MarkdownTextBlock MarkdownText="[Redusofficial](https://github.com/Redusofficial)" />
+                    <controls:MarkdownTextBlock MarkdownText="[srthMD](https://github.com/srthMD)" />
+                    <controls:MarkdownTextBlock MarkdownText="[axellse](https://github.com/axellse)" />
                 </StackPanel>
             </controls:Expander>
 
