@@ -424,15 +424,6 @@ namespace Rystrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analytics.
-        /// </summary>
-        public static string Common_Analytics {
-            get {
-                return ResourceManager.GetString("Common.Analytics", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Automatic.
         /// </summary>
         public static string Common_Automatic {
@@ -2591,29 +2582,29 @@ namespace Rystrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It&apos;s anonymous and nothing evil, promise. For insight on what we collect and why, see our [privacy policy]({0})..
-        /// </summary>
-        public static string Menu_Rystrap_Analytics_Description {
-            get {
-                return ResourceManager.GetString("Menu.Rystrap.Analytics.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable sending of analytics.
-        /// </summary>
-        public static string Menu_Rystrap_Analytics_Title {
-            get {
-                return ResourceManager.GetString("Menu.Rystrap.Analytics.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Configure options related to Rystrap&apos;s behaviour itself..
         /// </summary>
         public static string Menu_Rystrap_Description {
             get {
                 return ResourceManager.GetString("Menu.Rystrap.Description", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Have a suggestion, feature request, or bug to report? Open a new issue on our GitHub repository..
+        /// </summary>
+        public static string Menu_Rystrap_Feedback_Description {
+            get {
+                return ResourceManager.GetString("Menu.Rystrap.Feedback.Description", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Feedback &amp; Suggestions.
+        /// </summary>
+        public static string Menu_Rystrap_Feedback_Title {
+            get {
+                return ResourceManager.GetString("Menu.Rystrap.Feedback.Title", resourceCulture);
             }
         }
         

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Collections.ObjectModel;
 
 using Windows.Win32;
 using Windows.Win32.Foundation;
@@ -213,6 +214,8 @@ namespace Rystrap
             if (launchMode == LaunchMode.None)
                 throw new InvalidOperationException("No Roblox launch mode set");
 
+            PromptForLaunchAccount(launchMode);
+
             if (!File.Exists(Path.Combine(Paths.System, "mfplat.dll")))
             {
                 Frontend.ShowMessageBox(Strings.Bootstrapper_WMFNotFound, MessageBoxImage.Error);
@@ -269,6 +272,48 @@ namespace Rystrap
             dialog?.ShowBootstrapper();
 
             App.Logger.WriteLine(LOG_IDENT, "Exiting");
+        }
+
+        private static void PromptForLaunchAccount(LaunchMode launchMode)
+        {
+            const string LOG_IDENT = "LaunchHandler::PromptForLaunchAccount";
+
+            if (launchMode != LaunchMode.Player || App.LaunchSettings.QuietFlag.Active)
+                return;
+
+            string path = Path.Combine(Paths.Base, "Accounts.json");
+
+            if (!File.Exists(path))
+                return;
+
+            ObservableCollection<AccountProfile>? accounts;
+
+            try
+            {
+                accounts = JsonSerializer.Deserialize<ObservableCollection<AccountProfile>>(File.ReadAllText(path));
+            }
+            catch (Exception ex)
+            {
+                App.Logger.WriteException(LOG_IDENT, ex);
+                return;
+            }
+
+            if (accounts is null || accounts.Count == 0)
+                return;
+
+            var dialog = new AccountPickerDialog(accounts, App.State.Prop.LastSelectedAccountId);
+            bool? selected = dialog.ShowDialog();
+
+            if (selected != true || dialog.SelectedAccount is null)
+            {
+                App.Logger.WriteLine(LOG_IDENT, "Continuing without selected account");
+                return;
+            }
+
+            App.State.Prop.LastSelectedAccountId = dialog.SelectedAccount.Id;
+            App.State.Save();
+
+            App.Logger.WriteLine(LOG_IDENT, $"Selected account: {dialog.SelectedAccount.DisplayText}");
         }
 
         public static void LaunchWatcher()

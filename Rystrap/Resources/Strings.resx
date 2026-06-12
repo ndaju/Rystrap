@@ -479,7 +479,7 @@ Would you like to upgrade your currently installed version?</value>
     <value>Appearance</value>
   </data>
   <data name="Menu.Behaviour.AutoUpdate.Description" xml:space="preserve">
-    <value>Rystrap will automatically check and update itself when launching Roblox.</value>
+    <value>When enabled, Rystrap will automatically download and install updates in the background so you're always on the latest version. You can still choose to update manually at any time from this page.</value>
   </data>
   <data name="Menu.Behaviour.AutoUpdate.Title" xml:space="preserve">
     <value>Automatically update Rystrap</value>
@@ -1083,14 +1083,11 @@ Please manually delete Rystrap.exe from the install location or try restarting y
   <data name="Menu.Rystrap.Description" xml:space="preserve">
     <value>Configure options related to Rystrap's behaviour itself.</value>
   </data>
-  <data name="Menu.Rystrap.Analytics.Title" xml:space="preserve">
-    <value>Enable sending of analytics</value>
+  <data name="Menu.Rystrap.Feedback.Title" xml:space="preserve">
+    <value>Feedback &amp; Suggestions</value>
   </data>
-  <data name="Menu.Rystrap.Analytics.Description" xml:space="preserve">
-    <value>It's anonymous and nothing evil, promise. For insight on what we collect and why, see our [privacy policy]({0}).</value>
-  </data>
-  <data name="Common.Analytics" xml:space="preserve">
-    <value>Analytics</value>
+  <data name="Menu.Rystrap.Feedback.Description" xml:space="preserve">
+    <value>Have a suggestion, feature request, or bug to report? Open a new issue on our GitHub repository.</value>
   </data>
   <data name="Menu.FastFlags.Reset.Title" xml:space="preserve">
     <value>Reset everything to defaults</value>

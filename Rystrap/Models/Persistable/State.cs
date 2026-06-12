@@ -9,5 +9,7 @@
         public WindowState SettingsWindow { get; set; } = new();
 
         public bool FirstRunCompleted { get; set; } = false;
+
+        public string LastSelectedAccountId { get; set; } = "";
     }
 }

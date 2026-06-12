@@ -10,14 +10,22 @@ namespace Rystrap.UI.Elements.Dialogs
     {
         public AccountProfile? SelectedAccount { get; private set; }
 
-        public AccountPickerDialog(ObservableCollection<AccountProfile> accounts)
+        public AccountPickerDialog(ObservableCollection<AccountProfile> accounts, string? selectedAccountId = null)
         {
             InitializeComponent();
 
             AccountListBox.ItemsSource = accounts;
 
-            if (accounts.Count == 1)
+            if (!string.IsNullOrEmpty(selectedAccountId))
+                AccountListBox.SelectedItem = accounts.FirstOrDefault(x => x.Id == selectedAccountId);
+
+            if (AccountListBox.SelectedItem is null)
+                AccountListBox.SelectedItem = accounts.FirstOrDefault(x => x.IsFavorite);
+
+            if (AccountListBox.SelectedItem is null && accounts.Count == 1)
                 AccountListBox.SelectedIndex = 0;
+
+            SelectButton.IsEnabled = AccountListBox.SelectedItem is not null;
 
             AccountListBox.SelectionChanged += (_, _) =>
             {
