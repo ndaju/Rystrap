@@ -70,19 +70,6 @@ namespace Rystrap
 
         private static bool _showingExceptionDialog = false;
 
-        private static string? _webUrl = null;
-        public static string WebUrl
-        {
-            get {
-                if (_webUrl != null)
-                    return _webUrl;
-
-                string url = ConstructRystrapWebUrl();
-                if (Settings.Loaded) // only cache if settings are done loading
-                    _webUrl = url;
-                return url;
-            }
-        }
         
         public static void Terminate(ErrorCode exitCode = ErrorCode.ERROR_SUCCESS)
         {
@@ -129,8 +116,6 @@ namespace Rystrap
 
             _showingExceptionDialog = true;
 
-            SendLog();
-
             if (Bootstrapper?.Dialog != null)
             {
                 if (Bootstrapper.Dialog.TaskbarProgressValue == 0)
@@ -142,25 +127,6 @@ namespace Rystrap
             Frontend.ShowExceptionDialog(ex);
 
             Terminate(ErrorCode.ERROR_INSTALL_FAILURE);
-        }
-
-        public static string ConstructRystrapWebUrl()
-        {
-            // dont let user switch web environment if debug mode is not on
-            if (Settings.Prop.WebEnvironment == WebEnvironment.Production || !Settings.Prop.DeveloperMode)
-                return "";
-
-            string? sub = Settings.Prop.WebEnvironment.GetDescription();
-            return $"";
-        }
-
-        public static bool CanSendLogs()
-        {
-            // non developer mode always uses production
-            if (!Settings.Prop.DeveloperMode || Settings.Prop.WebEnvironment == WebEnvironment.Production)
-                return IsProductionBuild;
-
-            return true;
         }
 
         public static async Task<GithubRelease?> GetLatestRelease()
@@ -185,39 +151,6 @@ namespace Rystrap
             }
 
             return null;
-        }
-
-        public static async void SendStat(string key, string value)
-        {
-            if (!Settings.Prop.EnableAnalytics)
-                return;
-
-            try
-            {
-                await HttpClient.GetAsync($"https://{WebUrl}/metrics/post?key={key}&value={value}");
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteException("App::SendStat", ex);
-            }
-        }
-
-        public static async void SendLog()
-        {
-            if (!Settings.Prop.EnableAnalytics || !CanSendLogs())
-                return;
-
-            try
-            {
-                await HttpClient.PostAsync(
-                    $"https://{WebUrl}/metrics/post-exception", 
-                    new StringContent(Logger.AsDocument)
-                );
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteException("App::SendLog", ex);
-            }
         }
 
         public static void AssertWindowsOSVersion()
@@ -384,7 +317,6 @@ namespace Rystrap
                 }
 
                 Logger.WriteLine(LOG_IDENT, $"Developer mode: {Settings.Prop.DeveloperMode}");
-                Logger.WriteLine(LOG_IDENT, $"Web environment: {Settings.Prop.WebEnvironment}");
 
                 Locale.Set(Settings.Prop.Locale);
 

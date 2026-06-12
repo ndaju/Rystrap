@@ -27,8 +27,6 @@ namespace Rystrap
 
         public bool CreateStartMenuShortcuts = true;
 
-        public bool EnableAnalytics = true;
-
         public bool IsImplicitInstall = false;
 
         public string InstallLocationError { get; set; } = "";
@@ -102,14 +100,9 @@ namespace Rystrap
             App.State.Load(false);
             App.FastFlags.Load(false);
 
-            App.Settings.Prop.EnableAnalytics = EnableAnalytics;
-
             App.Settings.Save();
 
             App.Logger.WriteLine(LOG_IDENT, "Installation finished");
-
-            if (!IsImplicitInstall)
-                App.SendStat("installAction", "install");
         }
 
         private bool ValidateLocation()
@@ -357,7 +350,6 @@ namespace Rystrap
                 });
             }
 
-            App.SendStat("installAction", "uninstall");
         }
 
         public static void HandleUpgrade()
@@ -604,8 +596,6 @@ namespace Rystrap
 
             if (currentVer is null)
                 return;
-
-            App.SendStat("installAction", "upgrade");
 
             if (isAutoUpgrade)
             {

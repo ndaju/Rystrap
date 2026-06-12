@@ -43,5 +43,37 @@
             </controls:OptionControl.Style>
             <ui:ToggleSwitch IsChecked="{Binding ForceRobloxReinstallation, Mode=TwoWay}" />
         </controls:OptionControl>
+
+        <TextBlock Text="Bootstrapper Sounds" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl Header="Start Sound" Description="Play a sound when the bootstrapper starts.">
+            <StackPanel Orientation="Horizontal">
+                <ui:Button Icon="DocumentAdd16" Content="Browse..." Command="{Binding BrowseStartSoundCommand}" Margin="0,0,6,0" />
+                <ui:Button Icon="Delete16" Content="Clear" Appearance="Danger" Command="{Binding ClearStartSoundCommand}" Visibility="{Binding ShowClearStartSound, Mode=OneWay}" />
+                <TextBlock Text="{Binding BootstrapperStartSoundDisplay, Mode=OneWay}" VerticalAlignment="Center" Margin="6,0,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Error Sound" Description="Play a sound when the bootstrapper encounters an error.">
+            <StackPanel Orientation="Horizontal">
+                <ui:Button Icon="DocumentAdd16" Content="Browse..." Command="{Binding BrowseErrorSoundCommand}" Margin="0,0,6,0" />
+                <ui:Button Icon="Delete16" Content="Clear" Appearance="Danger" Command="{Binding ClearErrorSoundCommand}" Visibility="{Binding ShowClearErrorSound, Mode=OneWay}" />
+                <TextBlock Text="{Binding BootstrapperErrorSoundDisplay, Mode=OneWay}" VerticalAlignment="Center" Margin="6,0,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Complete Sound" Description="Play a sound when the bootstrapper finishes.">
+            <StackPanel Orientation="Horizontal">
+                <ui:Button Icon="DocumentAdd16" Content="Browse..." Command="{Binding BrowseCompleteSoundCommand}" Margin="0,0,6,0" />
+                <ui:Button Icon="Delete16" Content="Clear" Appearance="Danger" Command="{Binding ClearCompleteSoundCommand}" Visibility="{Binding ShowClearCompleteSound, Mode=OneWay}" />
+                <TextBlock Text="{Binding BootstrapperCompleteSoundDisplay, Mode=OneWay}" VerticalAlignment="Center" Margin="6,0,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <TextBlock Text="Appearance" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl Header="Progress Bar Color" Description="Customize the bootstrapper progress bar color (hex, e.g. #4CAF50). Defaults to green.">
+            <TextBox Text="{Binding BootstrapperProgressColor, Mode=TwoWay}" Width="140" Padding="8,4" />
+        </controls:OptionControl>
     </StackPanel>
 </ui:UiPage>

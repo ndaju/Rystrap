@@ -38,9 +38,32 @@ namespace Rystrap.UI.ViewModels.Settings
 
         private void CloseWindow() => RequestCloseWindowEvent?.Invoke(this, EventArgs.Empty);
 
+        private static void CopyCustomSound(string settingsPath, string targetRelativePath)
+        {
+            if (string.IsNullOrEmpty(settingsPath) || !File.Exists(settingsPath))
+            {
+                string destPath = Path.Combine(Paths.Modifications, targetRelativePath);
+                if (File.Exists(destPath))
+                {
+                    Filesystem.AssertReadOnly(destPath);
+                    File.Delete(destPath);
+                }
+                return;
+            }
+
+            string fullDestPath = Path.Combine(Paths.Modifications, targetRelativePath);
+            Directory.CreateDirectory(Path.GetDirectoryName(fullDestPath)!);
+            Filesystem.AssertReadOnly(fullDestPath);
+            File.Copy(settingsPath, fullDestPath, true);
+        }
+
         private void SaveSettings()
         {
             const string LOG_IDENT = "MainWindowViewModel::SaveSettings";
+
+            CopyCustomSound(App.Settings.Prop.CustomJumpSoundPath, @"content\sounds\action_jump.mp3");
+            CopyCustomSound(App.Settings.Prop.CustomDeathSoundPath, @"content\sounds\action_death.mp3");
+            CopyCustomSound(App.Settings.Prop.CustomWalkSoundPath, @"content\sounds\action_footsteps_plastic.mp3");
 
             App.Settings.Save();
             App.State.Save();

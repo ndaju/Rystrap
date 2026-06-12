@@ -16,6 +16,86 @@ namespace Rystrap.UI.ViewModels.Settings
 {
     public class ModsViewModel : NotifyPropertyChangedViewModel
     {
+        private string _customJumpSoundDisplay = "";
+        private string _customDeathSoundDisplay = "";
+        private string _customWalkSoundDisplay = "";
+
+        public string CustomJumpSoundDisplay
+        {
+            get => _customJumpSoundDisplay;
+            set { _customJumpSoundDisplay = value; OnPropertyChanged(nameof(CustomJumpSoundDisplay)); }
+        }
+        public string CustomDeathSoundDisplay
+        {
+            get => _customDeathSoundDisplay;
+            set { _customDeathSoundDisplay = value; OnPropertyChanged(nameof(CustomDeathSoundDisplay)); }
+        }
+        public string CustomWalkSoundDisplay
+        {
+            get => _customWalkSoundDisplay;
+            set { _customWalkSoundDisplay = value; OnPropertyChanged(nameof(CustomWalkSoundDisplay)); }
+        }
+
+        public bool HasCustomJumpSound => !string.IsNullOrEmpty(App.Settings.Prop.CustomJumpSoundPath);
+        public bool HasCustomDeathSound => !string.IsNullOrEmpty(App.Settings.Prop.CustomDeathSoundPath);
+        public bool HasCustomWalkSound => !string.IsNullOrEmpty(App.Settings.Prop.CustomWalkSoundPath);
+
+        public ICommand BrowseJumpSoundCommand => new RelayCommand(BrowseJumpSound);
+        public ICommand BrowseDeathSoundCommand => new RelayCommand(BrowseDeathSound);
+        public ICommand BrowseWalkSoundCommand => new RelayCommand(BrowseWalkSound);
+        public ICommand ClearJumpSoundCommand => new RelayCommand(ClearJumpSound);
+        public ICommand ClearDeathSoundCommand => new RelayCommand(ClearDeathSound);
+        public ICommand ClearWalkSoundCommand => new RelayCommand(ClearWalkSound);
+
+        private void BrowseJumpSound()
+        {
+            var dialog = new OpenFileDialog { Filter = "Audio Files (*.mp3;*.ogg;*.wav)|*.mp3;*.ogg;*.wav|All Files (*.*)|*.*", Title = "Select Jump sound" };
+            if (dialog.ShowDialog() == true)
+            {
+                App.Settings.Prop.CustomJumpSoundPath = dialog.FileName;
+                CustomJumpSoundDisplay = Path.GetFileName(dialog.FileName);
+                OnPropertyChanged(nameof(HasCustomJumpSound));
+                OnPropertyChanged(nameof(ShowClearJumpSound));
+            }
+        }
+        private void BrowseDeathSound()
+        {
+            var dialog = new OpenFileDialog { Filter = "Audio Files (*.mp3;*.ogg;*.wav)|*.mp3;*.ogg;*.wav|All Files (*.*)|*.*", Title = "Select Death sound" };
+            if (dialog.ShowDialog() == true)
+            {
+                App.Settings.Prop.CustomDeathSoundPath = dialog.FileName;
+                CustomDeathSoundDisplay = Path.GetFileName(dialog.FileName);
+                OnPropertyChanged(nameof(HasCustomDeathSound));
+                OnPropertyChanged(nameof(ShowClearDeathSound));
+            }
+        }
+        private void BrowseWalkSound()
+        {
+            var dialog = new OpenFileDialog { Filter = "Audio Files (*.mp3;*.ogg;*.wav)|*.mp3;*.ogg;*.wav|All Files (*.*)|*.*", Title = "Select Walk sound" };
+            if (dialog.ShowDialog() == true)
+            {
+                App.Settings.Prop.CustomWalkSoundPath = dialog.FileName;
+                CustomWalkSoundDisplay = Path.GetFileName(dialog.FileName);
+                OnPropertyChanged(nameof(HasCustomWalkSound));
+                OnPropertyChanged(nameof(ShowClearWalkSound));
+            }
+        }
+
+        private void ClearJumpSound() { App.Settings.Prop.CustomJumpSoundPath = ""; CustomJumpSoundDisplay = ""; OnPropertyChanged(nameof(HasCustomJumpSound)); OnPropertyChanged(nameof(ShowClearJumpSound)); }
+        private void ClearDeathSound() { App.Settings.Prop.CustomDeathSoundPath = ""; CustomDeathSoundDisplay = ""; OnPropertyChanged(nameof(HasCustomDeathSound)); OnPropertyChanged(nameof(ShowClearDeathSound)); }
+        private void ClearWalkSound() { App.Settings.Prop.CustomWalkSoundPath = ""; CustomWalkSoundDisplay = ""; OnPropertyChanged(nameof(HasCustomWalkSound)); OnPropertyChanged(nameof(ShowClearWalkSound)); }
+
+        public Visibility ShowClearJumpSound => HasCustomJumpSound ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility ShowClearDeathSound => HasCustomDeathSound ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility ShowClearWalkSound => HasCustomWalkSound ? Visibility.Visible : Visibility.Collapsed;
+
+        public ModsViewModel()
+        {
+            CustomJumpSoundDisplay = !string.IsNullOrEmpty(App.Settings.Prop.CustomJumpSoundPath) ? Path.GetFileName(App.Settings.Prop.CustomJumpSoundPath) : "";
+            CustomDeathSoundDisplay = !string.IsNullOrEmpty(App.Settings.Prop.CustomDeathSoundPath) ? Path.GetFileName(App.Settings.Prop.CustomDeathSoundPath) : "";
+            CustomWalkSoundDisplay = !string.IsNullOrEmpty(App.Settings.Prop.CustomWalkSoundPath) ? Path.GetFileName(App.Settings.Prop.CustomWalkSoundPath) : "";
+        }
+
         private void OpenModsFolder() => Process.Start("explorer.exe", Paths.Modifications);
 
         private readonly Dictionary<string, byte[]> FontHeaders = new()

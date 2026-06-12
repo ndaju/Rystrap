@@ -95,5 +95,31 @@
                 <ui:Button Icon="Delete16" Content="{x:Static resources:Strings.Menu_Mods_Misc_CustomFont_Remove}" Appearance="Danger" Command="{Binding ManageCustomFontCommand}" Visibility="{Binding DeleteCustomFontVisibility, Mode=OneWay}" />
             </StackPanel>
         </controls:OptionControl>
+
+        <TextBlock Text="Sound Mods" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl Header="Jump Sound" Description="Replace the Roblox jump sound with your own audio file.">
+            <StackPanel Orientation="Horizontal">
+                <ui:Button Icon="DocumentAdd16" Content="Browse..." Command="{Binding BrowseJumpSoundCommand}" Margin="0,0,6,0" />
+                <ui:Button Icon="Delete16" Content="Clear" Appearance="Danger" Command="{Binding ClearJumpSoundCommand}" Visibility="{Binding ShowClearJumpSound, Mode=OneWay}" />
+                <TextBlock Text="{Binding CustomJumpSoundDisplay, Mode=OneWay}" VerticalAlignment="Center" Margin="6,0,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Death Sound" Description="Replace the Roblox death sound with your own audio file.">
+            <StackPanel Orientation="Horizontal">
+                <ui:Button Icon="DocumentAdd16" Content="Browse..." Command="{Binding BrowseDeathSoundCommand}" Margin="0,0,6,0" />
+                <ui:Button Icon="Delete16" Content="Clear" Appearance="Danger" Command="{Binding ClearDeathSoundCommand}" Visibility="{Binding ShowClearDeathSound, Mode=OneWay}" />
+                <TextBlock Text="{Binding CustomDeathSoundDisplay, Mode=OneWay}" VerticalAlignment="Center" Margin="6,0,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Walk Sound" Description="Replace the Roblox walk/footstep sound with your own audio file.">
+            <StackPanel Orientation="Horizontal">
+                <ui:Button Icon="DocumentAdd16" Content="Browse..." Command="{Binding BrowseWalkSoundCommand}" Margin="0,0,6,0" />
+                <ui:Button Icon="Delete16" Content="Clear" Appearance="Danger" Command="{Binding ClearWalkSoundCommand}" Visibility="{Binding ShowClearWalkSound, Mode=OneWay}" />
+                <TextBlock Text="{Binding CustomWalkSoundDisplay, Mode=OneWay}" VerticalAlignment="Center" Margin="6,0,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+            </StackPanel>
+        </controls:OptionControl>
     </StackPanel>
 </ui:UiPage>

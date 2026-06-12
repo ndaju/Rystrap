@@ -372,8 +372,7 @@ namespace Rystrap
 
                 Deployment.Channel = channel;
 
-                if (!Deployment.IsDefaultChannel)
-                    App.SendStat("robloxChannel", channel);
+                
             }
             else
             {
@@ -1558,8 +1557,6 @@ namespace Rystrap
 
                     if (ex.GetType() == typeof(ChecksumFailedException))
                     {
-                        App.SendStat("packageDownloadState", "httpFail");
-
                         Frontend.ShowConnectivityDialog(
                             Strings.Dialog_Connectivity_UnableToDownload,
                             String.Format(Strings.Dialog_Connectivity_UnableToDownloadReason, "[https://github.com/ndaju/Rystrap/issues](https://github.com/ndaju/Rystrap/issues)"),

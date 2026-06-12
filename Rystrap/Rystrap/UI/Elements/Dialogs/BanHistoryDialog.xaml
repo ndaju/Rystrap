@@ -1,0 +1,50 @@
+﻿<base:WpfUiWindow x:Class="Rystrap.UI.Elements.Dialogs.BanHistoryDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:Rystrap.UI.Elements.Dialogs"
+        xmlns:base="clr-namespace:Rystrap.UI.Elements.Base"
+        mc:Ignorable="d"
+        Title="Ban / Kick History"
+        MinWidth="0"
+        MinHeight="0"
+        Width="700"
+        Height="500"
+        Background="{ui:ThemeResource ApplicationBackgroundBrush}"
+        ExtendsContentIntoTitleBar="True"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock Text="Ban / Kick Event History" FontSize="20" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding EventCount}" FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+        </StackPanel>
+
+        <Border Grid.Row="1" BorderBrush="{DynamicResource ControlStrongStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="4">
+            <ListView x:Name="BanListView" BorderThickness="0"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ItemsSource="{Binding Events}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Date" Width="140" DisplayMemberBinding="{Binding Timestamp, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" />
+                        <GridViewColumn Header="Type" Width="80" DisplayMemberBinding="{Binding BanType}" />
+                        <GridViewColumn Header="Reason" Width="200" DisplayMemberBinding="{Binding Reason}" />
+                        <GridViewColumn Header="Place" Width="150" DisplayMemberBinding="{Binding PlaceName}" />
+                        <GridViewColumn Header="Account" Width="100" DisplayMemberBinding="{Binding AccountName}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <ui:Button Content="Close" Appearance="Primary" Padding="16,6" Click="CloseButton_Click" />
+        </StackPanel>
+    </Grid>
+</base:WpfUiWindow>

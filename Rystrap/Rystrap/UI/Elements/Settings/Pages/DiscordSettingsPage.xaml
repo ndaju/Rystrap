@@ -1,0 +1,206 @@
+﻿<ui:UiPage x:Class="Rystrap.UI.Elements.Settings.Pages.DiscordSettingsPage"
+      x:Name="DiscordSettingsPageView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:models="clr-namespace:Rystrap.UI.ViewModels"
+      xmlns:controls="clr-namespace:Rystrap.UI.Elements.Controls"
+      xmlns:resources="clr-namespace:Rystrap.Resources"
+      xmlns:discord="clr-namespace:Rystrap.Models.Discord"
+      mc:Ignorable="d"
+      d:DesignHeight="1080" d:DesignWidth="800"
+      Title="DiscordSettingsPage"
+      Scrollable="True">
+    <StackPanel Margin="0,0,14,14">
+        <TextBlock Text="Discord Rich Presence settings for Roblox." FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+        <TextBlock Text="Rich Presence" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl
+            Header="Show Game Activity"
+            Description="Display what you're playing in Roblox on your Discord profile">
+            <ui:ToggleSwitch IsChecked="{Binding DiscordActivityEnabled, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl
+            Header="Allow Activity Joining"
+            Description="Allow others to join your game directly from Discord">
+            <ui:ToggleSwitch IsChecked="{Binding DiscordActivityJoinEnabled, Mode=TwoWay}" IsEnabled="{Binding DiscordActivityEnabled}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl
+            Header="Show Account on Profile"
+            Description="Show your Roblox account name on your Discord presence">
+            <ui:ToggleSwitch IsChecked="{Binding DiscordAccountOnProfile, Mode=TwoWay}" IsEnabled="{Binding DiscordActivityEnabled}" />
+        </controls:OptionControl>
+
+        <Separator Margin="0,4,0,4" />
+
+        <TextBlock Text="Enhanced Rich Presence" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+        <TextBlock Text="Customize your Discord presence with detailed status information" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+        <TextBlock Text="Custom Status" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl 
+            Header="Enable Custom Status" 
+            Description="Override the default game activity with a custom status message">
+            <ui:ToggleSwitch IsChecked="{Binding EnableCustomStatus, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <StackPanel Margin="0,8,0,0" IsEnabled="{Binding IsCustomStatusEnabled, Mode=OneWay}">
+            <TextBlock Text="Status Message" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+            <ui:TextBox Margin="0,4,0,0" 
+                        Text="{Binding CustomStatusMessage, UpdateSourceTrigger=PropertyChanged}" 
+                        PlaceholderText="e.g. Playing {game} with {creator}" />
+            <TextBlock Margin="0,4,0,0" 
+                       Text="Use {game}, {creator}, {place}, {server} as placeholders" 
+                       FontSize="11" 
+                       Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+        </StackPanel>
+
+        <TextBlock Text="Activity Type" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl 
+            Header="Activity Type" 
+            Description="Choose how your activity appears on Discord">
+            <ComboBox Width="160" 
+                      SelectedIndex="{Binding SelectedActivityType, Mode=TwoWay}"
+                      IsEnabled="{Binding IsCustomStatusEnabled, Mode=OneWay}">
+                <ComboBoxItem Content="Playing" />
+                <ComboBoxItem Content="Streaming" />
+                <ComboBoxItem Content="Listening" />
+                <ComboBoxItem Content="Watching" />
+                <ComboBoxItem Content="Competing" />
+            </ComboBox>
+        </controls:OptionControl>
+
+        <TextBlock Text="Timestamp Features" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl 
+            Header="Timestamp Display" 
+            Description="Show elapsed or remaining time on your presence">
+            <ComboBox Width="160" 
+                      SelectedIndex="{Binding SelectedTimestampMode, Mode=TwoWay}"
+                      IsEnabled="{Binding IsCustomStatusEnabled, Mode=OneWay}">
+                <ComboBoxItem Content="None" />
+                <ComboBoxItem Content="Elapsed Time" />
+                <ComboBoxItem Content="Remaining Time" />
+            </ComboBox>
+        </controls:OptionControl>
+
+        <TextBlock Text="Party Size Display" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl 
+            Header="Show Party Size" 
+            Description="Display player count in your server">
+            <ui:ToggleSwitch IsChecked="{Binding ShowPartySize, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <StackPanel Margin="24,8,0,0" IsEnabled="{Binding IsPartySizeEnabled, Mode=OneWay}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                    <TextBlock Text="Current Players" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <ui:TextBox Margin="0,4,0,0" 
+                                Text="{Binding PartyCurrentSize, Mode=TwoWay}" 
+                                Width="80" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                    <TextBlock Text="Max Players" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <ui:TextBox Margin="0,4,0,0" 
+                                Text="{Binding PartyMaxSize, Mode=TwoWay}" 
+                                Width="80" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <TextBlock Text="Rich Button Actions" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl 
+            Header="Enable Custom Buttons" 
+            Description="Add custom action buttons to your presence">
+            <ui:ToggleSwitch IsChecked="{Binding EnableCustomButtons, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <StackPanel Margin="24,8,0,0" IsEnabled="{Binding IsCustomButtonsEnabled, Mode=OneWay}">
+            <ItemsControl ItemsSource="{Binding CustomButtons, Mode=OneWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,8" 
+                                Padding="12" 
+                                BorderBrush="{DynamicResource ControlStrongStrokeColorDefaultBrush}" 
+                                BorderThickness="1" 
+                                CornerRadius="4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                                    <TextBlock Text="Label" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    <ui:TextBox Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                                    <TextBlock Text="URL" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    <ui:TextBox Text="{Binding Url, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                                <ui:Button Grid.Column="2" 
+                                          Icon="Delete28" 
+                                          Appearance="Danger" 
+                                          VerticalAlignment="Bottom"
+                                          Command="{Binding DataContext.RemoveCustomButtonCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                                          CommandParameter="{Binding}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ui:Button Icon="Add28" 
+                      Content="Add Button" 
+                      HorizontalAlignment="Stretch" 
+                      Margin="0,4,0,0"
+                      Command="{Binding AddCustomButtonCommand, Mode=OneTime}" />
+        </StackPanel>
+
+        <TextBlock Text="Status Templates" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+        <TextBlock Text="Quick-apply pre-built status configurations" 
+                   TextWrapping="Wrap" 
+                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+        <ItemsControl Margin="0,8,0,0" ItemsSource="{Binding AvailableTemplates, Mode=OneWay}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,8" 
+                            Padding="12" 
+                            BorderBrush="{DynamicResource ControlStrongStrokeColorDefaultBrush}" 
+                            BorderThickness="1" 
+                            CornerRadius="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
+                                <TextBlock Text="{Binding Details}" 
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" 
+                                           FontSize="12" />
+                            </StackPanel>
+                            <ui:Button Grid.Column="1" 
+                                      Content="Apply" 
+                                      Appearance="Primary"
+                                      Command="{Binding DataContext.ApplyTemplateCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                                      CommandParameter="{Binding}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</ui:UiPage>

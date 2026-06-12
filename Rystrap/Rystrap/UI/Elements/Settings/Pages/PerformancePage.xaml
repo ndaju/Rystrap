@@ -1,0 +1,62 @@
+﻿<ui:UiPage x:Class="Rystrap.UI.Elements.Settings.Pages.PerformancePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:controls="clr-namespace:Rystrap.UI.Elements.Controls"
+      xmlns:dmodels="clr-namespace:Rystrap.UI.ViewModels.Settings"
+      xmlns:resources="clr-namespace:Rystrap.Resources"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance dmodels:PerformanceViewModel, IsDesignTimeCreatable=True}"
+      d:DesignHeight="700" d:DesignWidth="800"
+      Title="PerformancePage"
+      Scrollable="True">
+    <StackPanel Margin="0,0,14,14">
+        <TextBlock Text="Performance and graphics optimization settings for Roblox." FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+        <TextBlock Text="FPS &amp; Graphics" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl Header="FPS Unlocker" Description="Set a custom FPS cap (0 = default Roblox cap)">
+            <StackPanel Orientation="Horizontal">
+                <ui:TextBox Text="{Binding FpsUnlockerTarget, TargetNullValue=0}" Width="80" />
+                <TextBlock Text="{Binding FpsUnlockerDisplay}" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Render Distance" Description="Override the default render distance (0 = default)">
+            <StackPanel Orientation="Horizontal">
+                <ui:TextBox Text="{Binding RenderDistance, TargetNullValue=0}" Width="80" />
+                <TextBlock Text="{Binding RenderDistanceDisplay}" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Graphics Quality" Description="Force a graphics quality preset">
+            <ComboBox Width="160" Padding="10,5,10,5" ItemsSource="{Binding GraphicsQualityOptions}" Text="{Binding GraphicsQualityPreset, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Disable Particles" Description="Turn off particle effects for better performance">
+            <ui:ToggleSwitch IsChecked="{Binding DisableParticles, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Disable Lighting" Description="Turn off advanced lighting for maximum FPS">
+            <ui:ToggleSwitch IsChecked="{Binding DisableLighting, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <TextBlock Text="CPU &amp; Process" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl Header="CPU Priority" Description="Set the Roblox process priority class">
+            <ComboBox Width="160" Padding="10,5,10,5" ItemsSource="{Binding CpuPriorityOptions}" Text="{Binding CpuPriorityClass, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="CPU Affinity Mask" Description="Set which CPU cores Roblox can use (hex, e.g. FF for all 8 cores)">
+            <ui:TextBox Text="{Binding CpuAffinityMask}" Width="100" PlaceholderText="e.g. FF" />
+        </controls:OptionControl>
+
+        <TextBlock Text="Network &amp; Region" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl Header="Preferred Server Region" Description="Prefer connecting to servers in a specific region">
+            <ComboBox Width="160" Padding="10,5,10,5" ItemsSource="{Binding RegionOptions}" Text="{Binding PreferredServerRegion, Mode=TwoWay}" />
+        </controls:OptionControl>
+    </StackPanel>
+</ui:UiPage>
