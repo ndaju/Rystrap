@@ -14,13 +14,13 @@ Rystrap is a third-party replacement for the standard Roblox bootstrapper. It ha
 
 ## Features
 
-- **Discord Rich Presence** -- shows your friends what game you're in
+- **Better Discord Rich Presence** -- shows your friends what game you're in
 - **Content modding** -- swap out sounds, textures, cursors, fonts
 - **Plugin system** -- load .dll plugins with a full event bus
 - **Themes** -- 6 built-in, import/export your own via zip
 - **Server location** -- see where the game server is (powered by ipinfo.io)
 - **FastFlag editor** -- configure graphics, MSAA, texture quality, DPI
-- **30+ languages** -- community-translated on Crowdin
+- **30+ Futures** -- more futures then bloxstrap thing ah
 - **Auto-updater** -- checks for new releases on startup
 
 ## Installing
