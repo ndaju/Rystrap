@@ -1,0 +1,51 @@
+﻿<ui:UiPage x:Class="Rystrap.UI.Elements.Settings.Pages.DevToolsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:controls="clr-namespace:Rystrap.UI.Elements.Controls"
+      xmlns:dmodels="clr-namespace:Rystrap.UI.ViewModels.Settings"
+      xmlns:resources="clr-namespace:Rystrap.Resources"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance dmodels:DevToolsViewModel, IsDesignTimeCreatable=True}"
+      d:DesignHeight="700" d:DesignWidth="800"
+      Title="DevToolsPage"
+      Scrollable="True">
+    <StackPanel Margin="0,0,14,14">
+        <TextBlock Margin="0,0,0,16" Text="Developer tools for debugging, inspecting, and troubleshooting Roblox." FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+        <controls:OptionControl Header="Clear Roblox Cookies" Description="Delete all Roblox saved cookies — this will log you out of your account on the Roblox app">
+            <ui:Button Content="Clear Cookies" Icon="Delete28" Padding="12,4" Appearance="Danger" Command="{Binding ClearCookiesCommand}" />
+        </controls:OptionControl>
+
+        <Separator Margin="0,4,0,8" />
+
+        <!-- Other Tools -->
+        <controls:OptionControl Header="Console Log Viewer" Description="View the 10 most recent Roblox log files">
+            <ui:Button Content="Open Log Viewer" Icon="DocumentSearch24" Padding="12,4" Command="{Binding OpenLogViewerCommand}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Place ID Opener" Description="Quickly open any Roblox place by its ID">
+            <ui:Button Content="Open Place ID" Icon="Play24" Padding="12,4" Command="{Binding OpenPlaceCommand}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Resource Monitor" Description="Open Windows Resource Monitor to monitor Roblox network/CPU/memory">
+            <ui:Button Content="Open Monitor" Icon="Globe24" Padding="12,4" Command="{Binding OpenNetworkMonitorCommand}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Roblox Logs Folder" Description="Open the Roblox logs directory in File Explorer">
+            <ui:Button Content="Open Logs Folder" Icon="OpenFolder24" Padding="12,4" Command="{Binding OpenLogsFolderCommand}" />
+        </controls:OptionControl>
+
+        <Separator Margin="0,4,0,8" />
+
+        <controls:OptionControl Header="Ban / Kick History" Description="View recent ban and kick events recorded from games">
+            <ui:Button Content="View Ban History" Padding="12,4" Command="{Binding OpenBanHistoryCommand}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Game-Specific Settings" Description="Configure graphics/performance settings per game place ID">
+            <ui:Button Content="Manage Game Settings" Padding="12,4" Command="{Binding OpenGameSettingsCommand}" />
+        </controls:OptionControl>
+    </StackPanel>
+</ui:UiPage>

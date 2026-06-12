@@ -1,0 +1,44 @@
+﻿<base:WpfUiWindow x:Class="Rystrap.UI.Elements.Dialogs.ExportModPackDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:base="clr-namespace:Rystrap.UI.Elements.Base"
+        Title="Export Mod Pack"
+        Width="420" SizeToContent="Height"
+        MinWidth="420"
+        ResizeMode="NoResize"
+        Background="{ui:ThemeResource ApplicationBackgroundBrush}"
+        ExtendsContentIntoTitleBar="True"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Export Mod Pack" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,12" />
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,8">
+            <TextBlock Text="Pack Name" FontSize="12" Margin="0,0,0,4" />
+            <ui:TextBox x:Name="PackNameBox" PlaceholderText="My Mod Pack" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,0,0,8">
+            <TextBlock Text="Author" FontSize="12" Margin="0,0,0,4" />
+            <ui:TextBox x:Name="AuthorBox" PlaceholderText="Your name" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="0,0,0,12">
+            <TextBlock Text="Description" FontSize="12" Margin="0,0,0,4" />
+            <ui:TextBox x:Name="DescriptionBox" PlaceholderText="What's in this pack?" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <ui:Button Content="Cancel" IsCancel="True" MinWidth="80" Margin="0,0,8,0" />
+            <ui:Button x:Name="ExportButton" Content="Export" Appearance="Primary" MinWidth="80" Click="OnExportClick" IsDefault="True" />
+        </StackPanel>
+    </Grid>
+</base:WpfUiWindow>
