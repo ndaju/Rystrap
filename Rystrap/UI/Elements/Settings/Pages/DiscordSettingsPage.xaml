@@ -16,24 +16,28 @@
     <StackPanel Margin="0,0,14,14">
         <TextBlock Text="Discord Rich Presence settings for Roblox." FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
 
-        <TextBlock Text="Rich Presence" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+        <TextBlock Text="Discord Rich Presence" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+        <controls:MarkdownTextBlock MarkdownText="{Binding Source={x:Static resources:Strings.Menu_Integrations_RequiresActivityTracking}, Converter={StaticResource StringFormatConverter}, ConverterParameter='https://github.com/ndaju/Rystrap/wiki/discord-rich-presence/'}" TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
 
-        <controls:OptionControl
-            Header="Show Game Activity"
-            Description="Display what you're playing in Roblox on your Discord profile">
+        <controls:OptionControl 
+            Header="{x:Static resources:Strings.Menu_Integrations_ShowGameActivity_Title}" 
+            Description="{Binding Source={x:Static resources:Strings.Menu_Integrations_ShowGameActivity_Description}, Converter={StaticResource StringFormatConverter}, ConverterParameter='https://github.com/ndaju/Rystrap/wiki/discord-rich-presence-not-working/'}"
+            x:Name="DiscordActivityOption">
             <ui:ToggleSwitch IsChecked="{Binding DiscordActivityEnabled, Mode=TwoWay}" />
         </controls:OptionControl>
 
-        <controls:OptionControl
-            Header="Allow Activity Joining"
-            Description="Allow others to join your game directly from Discord">
-            <ui:ToggleSwitch IsChecked="{Binding DiscordActivityJoinEnabled, Mode=TwoWay}" IsEnabled="{Binding DiscordActivityEnabled}" />
+        <controls:OptionControl 
+            Header="{x:Static resources:Strings.Menu_Integrations_AllowActivityJoining_Title}" 
+            Description="{x:Static resources:Strings.Menu_Integrations_AllowActivityJoining_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=DiscordActivityOption, Mode=OneWay}">
+            <ui:ToggleSwitch IsChecked="{Binding DiscordActivityJoinEnabled, Mode=TwoWay}" />
         </controls:OptionControl>
 
-        <controls:OptionControl
-            Header="Show Account on Profile"
-            Description="Show your Roblox account name on your Discord presence">
-            <ui:ToggleSwitch IsChecked="{Binding DiscordAccountOnProfile, Mode=TwoWay}" IsEnabled="{Binding DiscordActivityEnabled}" />
+        <controls:OptionControl 
+            Header="{x:Static resources:Strings.Menu_Integrations_ShowAccountOnProfile_Title}" 
+            Description="{x:Static resources:Strings.Menu_Integrations_ShowAccountOnProfile_Description}"
+            IsEnabled="{Binding InnerContent.IsChecked, ElementName=DiscordActivityOption, Mode=OneWay}">
+            <ui:ToggleSwitch IsChecked="{Binding DiscordAccountOnProfile, Mode=TwoWay}" />
         </controls:OptionControl>
 
         <Separator Margin="0,4,0,4" />

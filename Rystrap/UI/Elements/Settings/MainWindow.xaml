@@ -61,7 +61,7 @@
                     <ui:NavigationItem Content="Launch Options" PageType="{x:Type pages:LaunchOptionsPage}" Icon="Rocket24" Tag="launchoptions" />
                     <ui:NavigationItem Content="Performance" PageType="{x:Type pages:PerformancePage}" Icon="Gauge24" Tag="performance" />
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_Mods_Title}" PageType="{x:Type pages:ModsPage}" Icon="WrenchScrewdriver20" Tag="mods" />
-                    <ui:NavigationItem Content="Better Mods" PageType="{x:Type pages:BetterModsPage}" Icon="AppsListDetail24" Tag="bettermods" />
+                    
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_FastFlags_Title}" PageType="{x:Type pages:FastFlagsPage}" Icon="Flag24" Tag="fastflags" />
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_Appearance_Title}" PageType="{x:Type pages:AppearancePage}" Icon="PaintBrush24" Tag="appearance" />
                     <ui:NavigationItem Content="{x:Static resources:Strings.Common_Shortcuts}" PageType="{x:Type pages:ShortcutsPage}" Icon="Apps28" Tag="shortcuts" />
