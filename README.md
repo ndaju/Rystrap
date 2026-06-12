@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="https://github.com/ndaju/Rystrap/raw/main/Images/Rystrap-full-dark.png#gh-dark-mode-only" width="420">
-  <img src="https://github.com/ndaju/Rystrap/raw/main/Images/Rystrap-full-light.png#gh-light-mode-only" width="420">
+  <img src="https://github.com/ndaju/Rystrap/raw/main/Images/Ndaju-full-dark.png#gh-dark-mode-only" width="420">
+  <img src="https://github.com/ndaju/Rystrap/raw/main/Images/Ndaju-full-light.png#gh-light-mode-only" width="420">
 </p>
 
 <p align="center">
