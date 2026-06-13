@@ -64,6 +64,7 @@
                 TextWrapping="Wrap" />
 
             <ProgressBar
+                x:Name="ProgressBarControl"
                 Grid.Row="2"
                 Margin="0,0,0,16"
                 IsIndeterminate="{Binding ProgressIndeterminate, Mode=OneWay}"

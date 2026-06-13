@@ -118,6 +118,12 @@ namespace Rystrap.UI.Elements.Bootstrapper
             // setting this to true for mica results in the window being undraggable
             if (aero)
                 AllowsTransparency = true;
+
+            if (!string.IsNullOrEmpty(App.Settings.Prop.BootstrapperProgressColor))
+            {
+                try { ProgressBarControl.Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(App.Settings.Prop.BootstrapperProgressColor)); }
+                catch { }
+            }
         }
 
         private void UiWindow_Closing(object sender, CancelEventArgs e)
