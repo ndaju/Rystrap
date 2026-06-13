@@ -40,7 +40,7 @@ namespace Rystrap.UI.Elements.Dialogs
             return version switch
             {
                 "2.11.3" => "- Forked to ndaju/Rystrap\n- Fixed blurry icon in bootstrapper & launch menu\n- Fixed XAML build errors\n- Removed dead Rystraplabs.com links\n- Updated all GitHub references\n- Cleaned up launch menu (removed wiki/community links)\n- Added plugin system, theme engine, mod manager",
-                "2.11.4" => "- Removed analytics and WebEnvironment\n- Added launch-time account selection dialog\n- Moved Discord Rich Presence settings to Discord Settings tab\n- Removed Better Mods tab\n- Added mod preset tasks (sound mods, cursor, emoji, font)\n- Added bootstrapper sound customization (start, error, complete)\n- Added bootstrapper progress bar color picker (defaults to green #4CAF50)\n- Added bootstrapper background image support\n- Added Reset to Default buttons for Mods and Bootstrapper tabs\n- Progress bar color now applies to FluentDialog & ClassicFluentDialog\n- Fixed build errors with nested source exclusions",
+                "2.11.5" => "- Removed analytics and WebEnvironment\n- Added launch-time account selection dialog\n- Moved Discord Rich Presence settings to Discord Settings tab\n- Removed Better Mods tab\n- Added mod preset tasks (sound mods, cursor, emoji, font)\n- Added bootstrapper sound customization (start, error, complete)\n- Added bootstrapper progress bar color picker (defaults to green #4CAF50)\n- Added bootstrapper background image support\n- Added Reset to Default buttons for Mods and Bootstrapper tabs\n- Progress bar color now applies to FluentDialog & ClassicFluentDialog\n- Fixed build errors with nested source exclusions",
                 _ => "",
             };
         }
