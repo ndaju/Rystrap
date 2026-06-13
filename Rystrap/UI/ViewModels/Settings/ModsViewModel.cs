@@ -147,6 +147,49 @@ namespace Rystrap.UI.ViewModels.Settings
 
         public ICommand OpenCompatSettingsCommand => new RelayCommand(OpenCompatSettings);
 
+        public ICommand ResetModsCommand => new RelayCommand(ResetModsToDefault);
+
+        private void ResetModsToDefault()
+        {
+            var result = Frontend.ShowMessageBox("This will reset all mods to their original state. Continue?", MessageBoxImage.Question, MessageBoxButton.YesNo);
+            if (result != MessageBoxResult.Yes)
+                return;
+
+            // reset mod preset tasks
+            OldAvatarBackgroundTask.NewState = false;
+            OldAvatarBackgroundTask.Execute();
+
+            OldCharacterSoundsTask.NewState = false;
+            OldCharacterSoundsTask.Execute();
+
+            CursorTypeTask.NewState = default;
+            CursorTypeTask.Execute();
+
+            EmojiFontTask.NewState = default;
+            EmojiFontTask.Execute();
+
+            TextFontTask.NewState = "";
+            TextFontTask.Execute();
+
+            // clear custom sounds
+            ClearJumpSound();
+            ClearDeathSound();
+            ClearWalkSound();
+
+            // clear custom font
+            if (!string.IsNullOrEmpty(TextFontTask.NewState))
+            {
+                if (File.Exists(Paths.CustomFont))
+                {
+                    Filesystem.AssertReadOnly(Paths.CustomFont);
+                    File.Delete(Paths.CustomFont);
+                }
+                TextFontTask.NewState = "";
+            }
+
+            Frontend.ShowMessageBox("All mods have been reset to default.", MessageBoxImage.Information);
+        }
+
         public ModPresetTask OldAvatarBackgroundTask { get; } = new("OldAvatarBackground", @"ExtraContent\places\Mobile.rbxl", "OldAvatarBackground.rbxl");
 
         public ModPresetTask OldCharacterSoundsTask { get; } = new("OldCharacterSounds", new()

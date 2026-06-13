@@ -31,6 +31,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <Image x:Name="BackgroundImage" Grid.RowSpan="3" Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
         <ui:TitleBar Grid.Row="0" x:Name="RootTitleBar" Padding="8" Title="{Binding Title, Mode=OneTime}" ShowMinimize="False" ShowMaximize="False" CanMaximize="False" ShowClose="False" />
 
         <ui:TitleBar

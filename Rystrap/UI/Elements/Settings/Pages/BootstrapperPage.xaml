@@ -75,5 +75,13 @@
         <controls:OptionControl Header="Progress Bar Color" Description="Customize the bootstrapper progress bar color (hex, e.g. #4CAF50). Defaults to green.">
             <TextBox Text="{Binding BootstrapperProgressColor, Mode=TwoWay}" Width="140" Padding="8,4" />
         </controls:OptionControl>
+
+        <controls:OptionControl Header="Background Image" Description="Set a background image for the bootstrapper window.">
+            <StackPanel Orientation="Horizontal">
+                <ui:Button Icon="DocumentAdd16" Content="Browse..." Command="{Binding BrowseBootstrapperBackgroundImageCommand}" Margin="0,0,6,0" />
+                <ui:Button Icon="Delete16" Content="Clear" Appearance="Danger" Command="{Binding ClearBootstrapperBackgroundImageCommand}" Visibility="{Binding ShowClearBootstrapperBackgroundImage, Mode=OneWay}" />
+                <TextBlock Text="{Binding BootstrapperBackgroundImageDisplay, Mode=OneWay}" VerticalAlignment="Center" Margin="6,0,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+            </StackPanel>
+        </controls:OptionControl>
     </StackPanel>
 </ui:UiPage>

@@ -47,6 +47,7 @@ namespace Rystrap.UI.ViewModels.Settings
             BootstrapperStartSoundDisplay = !string.IsNullOrEmpty(App.Settings.Prop.BootstrapperStartSound) ? Path.GetFileName(App.Settings.Prop.BootstrapperStartSound) : "";
             BootstrapperErrorSoundDisplay = !string.IsNullOrEmpty(App.Settings.Prop.BootstrapperErrorSound) ? Path.GetFileName(App.Settings.Prop.BootstrapperErrorSound) : "";
             BootstrapperCompleteSoundDisplay = !string.IsNullOrEmpty(App.Settings.Prop.BootstrapperCompleteSound) ? Path.GetFileName(App.Settings.Prop.BootstrapperCompleteSound) : "";
+            BootstrapperBackgroundImageDisplay = !string.IsNullOrEmpty(App.Settings.Prop.BootstrapperBackgroundImage) ? Path.GetFileName(App.Settings.Prop.BootstrapperBackgroundImage) : "";
         }
 
         private void BrowseStartSound()
@@ -117,6 +118,38 @@ namespace Rystrap.UI.ViewModels.Settings
                 App.Settings.Prop.BootstrapperProgressColor = value;
                 OnPropertyChanged(nameof(BootstrapperProgressColor));
             }
+        }
+
+        private string _bootstrapperBackgroundImageDisplay = "";
+        public string BootstrapperBackgroundImageDisplay
+        {
+            get => _bootstrapperBackgroundImageDisplay;
+            set { _bootstrapperBackgroundImageDisplay = value; OnPropertyChanged(nameof(BootstrapperBackgroundImageDisplay)); }
+        }
+        public bool HasBootstrapperBackgroundImage => !string.IsNullOrEmpty(App.Settings.Prop.BootstrapperBackgroundImage);
+        public Visibility ShowClearBootstrapperBackgroundImage => HasBootstrapperBackgroundImage ? Visibility.Visible : Visibility.Collapsed;
+
+        public ICommand BrowseBootstrapperBackgroundImageCommand => new RelayCommand(BrowseBootstrapperBackgroundImage);
+        public ICommand ClearBootstrapperBackgroundImageCommand => new RelayCommand(ClearBootstrapperBackgroundImage);
+
+        private void BrowseBootstrapperBackgroundImage()
+        {
+            var dialog = new OpenFileDialog { Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp|All Files (*.*)|*.*", Title = "Select bootstrapper background image" };
+            if (dialog.ShowDialog() == true)
+            {
+                App.Settings.Prop.BootstrapperBackgroundImage = dialog.FileName;
+                BootstrapperBackgroundImageDisplay = Path.GetFileName(dialog.FileName);
+                OnPropertyChanged(nameof(HasBootstrapperBackgroundImage));
+                OnPropertyChanged(nameof(ShowClearBootstrapperBackgroundImage));
+            }
+        }
+
+        private void ClearBootstrapperBackgroundImage()
+        {
+            App.Settings.Prop.BootstrapperBackgroundImage = "";
+            BootstrapperBackgroundImageDisplay = "";
+            OnPropertyChanged(nameof(HasBootstrapperBackgroundImage));
+            OnPropertyChanged(nameof(ShowClearBootstrapperBackgroundImage));
         }
     }
 }

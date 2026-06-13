@@ -124,6 +124,12 @@ namespace Rystrap.UI.Elements.Bootstrapper
                 try { ProgressBarControl.Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(App.Settings.Prop.BootstrapperProgressColor)); }
                 catch { }
             }
+
+            if (!string.IsNullOrEmpty(App.Settings.Prop.BootstrapperBackgroundImage))
+            {
+                try { BackgroundImage.Source = new BitmapImage(new Uri(App.Settings.Prop.BootstrapperBackgroundImage)); }
+                catch { }
+            }
         }
 
         private void UiWindow_Closing(object sender, CancelEventArgs e)

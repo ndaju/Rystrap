@@ -28,6 +28,7 @@
 
     <!--  Background is for Aero theme only  -->
     <Grid Background="{Binding Path=BackgroundColourBrush, Mode=OneTime}">
+        <Image x:Name="BackgroundImage" Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="-1" />
         <!--  Allow for drag  -->
         <ui:TitleBar
             VerticalAlignment="Top"

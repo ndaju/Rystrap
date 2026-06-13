@@ -26,6 +26,7 @@
     </Window.TaskbarItemInfo>
 
     <Grid>
+        <Image x:Name="BackgroundImage" Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         <ui:TitleBar
             VerticalAlignment="Top"
             CanMaximize="False"

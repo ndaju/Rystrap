@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 
 using Rystrap.UI.Elements.Bootstrapper.Base;
@@ -102,6 +103,12 @@ namespace Rystrap.UI.Elements.Bootstrapper
             if (!string.IsNullOrEmpty(App.Settings.Prop.BootstrapperProgressColor))
             {
                 try { ProgressBarControl.Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(App.Settings.Prop.BootstrapperProgressColor)); }
+                catch { }
+            }
+
+            if (!string.IsNullOrEmpty(App.Settings.Prop.BootstrapperBackgroundImage))
+            {
+                try { BackgroundImage.Source = new BitmapImage(new Uri(App.Settings.Prop.BootstrapperBackgroundImage)); }
                 catch { }
             }
         }
