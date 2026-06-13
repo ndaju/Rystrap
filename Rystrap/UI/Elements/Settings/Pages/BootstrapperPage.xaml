@@ -83,5 +83,7 @@
                 <TextBlock Text="{Binding BootstrapperBackgroundImageDisplay, Mode=OneWay}" VerticalAlignment="Center" Margin="6,0,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
             </StackPanel>
         </controls:OptionControl>
+
+        <ui:Button Margin="0,16,0,0" Icon="ArrowReset24" Content="Reset to Default" Appearance="Danger" HorizontalAlignment="Stretch" Command="{Binding ResetBootstrapperToDefaultCommand}" />
     </StackPanel>
 </ui:UiPage>

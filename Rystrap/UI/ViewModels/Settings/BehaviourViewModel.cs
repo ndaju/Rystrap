@@ -151,5 +151,24 @@ namespace Rystrap.UI.ViewModels.Settings
             OnPropertyChanged(nameof(HasBootstrapperBackgroundImage));
             OnPropertyChanged(nameof(ShowClearBootstrapperBackgroundImage));
         }
+
+        public ICommand ResetBootstrapperToDefaultCommand => new RelayCommand(ResetBootstrapperToDefault);
+
+        private void ResetBootstrapperToDefault()
+        {
+            var result = Frontend.ShowMessageBox("Reset all bootstrapper settings to default?", MessageBoxImage.Question, MessageBoxButton.YesNo);
+            if (result != MessageBoxResult.Yes)
+                return;
+
+            ClearStartSound();
+            ClearErrorSound();
+            ClearCompleteSound();
+            ClearBootstrapperBackgroundImage();
+
+            BootstrapperProgressColor = "#4CAF50";
+            OnPropertyChanged(nameof(BootstrapperProgressColor));
+
+            Frontend.ShowMessageBox("Bootstrapper settings reset to default.", MessageBoxImage.Information);
+        }
     }
 }
