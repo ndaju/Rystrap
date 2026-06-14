@@ -207,7 +207,7 @@ namespace Rystrap.UI.ViewModels.Settings
             CustomLaunchArgs = "";
             MemoryLimitMB = 0;
             GpuPreference = GpuPreference.Default;
-            MultiInstanceEnabled = false;
+            MultiInstanceEnabled = true;
             WorkingDirectory = "";
             EnvironmentOverrides.Clear();
         }

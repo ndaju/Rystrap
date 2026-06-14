@@ -10,7 +10,7 @@ namespace Rystrap.Models
 
         public GpuPreference GpuPreference { get; set; } = GpuPreference.Default;
 
-        public bool MultiInstanceEnabled { get; set; } = false;
+        public bool MultiInstanceEnabled { get; set; } = true;
 
         public string WorkingDirectory { get; set; } = "";
 

@@ -12,6 +12,7 @@ namespace Rystrap.Models.Persistable
         public string BootstrapperIconCustomLocation { get; set; } = "";
         public string BootstrapperProgressColor { get; set; } = "#4CAF50";
         public string BootstrapperBackgroundImage { get; set; } = "";
+        public string CustomCursorPath { get; set; } = "";
         public Theme Theme { get; set; } = Theme.Default;
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool DeveloperMode { get; set; } = false;
@@ -53,7 +54,7 @@ namespace Rystrap.Models.Persistable
 
         // launch options
         public LaunchOptions LaunchOptions { get; set; } = new();
-        public bool MultiInstanceEnabled { get; set; } = false;
+        public bool MultiInstanceEnabled { get; set; } = true;
 
         // discord rich presence
         public EnhancedPresenceConfig EnhancedDiscordPresence { get; set; } = new();

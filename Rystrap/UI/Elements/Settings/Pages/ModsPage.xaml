@@ -122,6 +122,16 @@
             </StackPanel>
         </controls:OptionControl>
 
+        <TextBlock Text="Cursor" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <controls:OptionControl Header="Custom Cursor" Description="Upload a custom .cur or .png file to replace the Roblox cursor.">
+            <StackPanel Orientation="Horizontal">
+                <ui:Button Icon="DocumentAdd16" Content="Browse..." Command="{Binding BrowseCustomCursorCommand}" Margin="0,0,6,0" />
+                <ui:Button Icon="Delete16" Content="Clear" Appearance="Danger" Command="{Binding ClearCustomCursorCommand}" Visibility="{Binding ShowClearCustomCursor, Mode=OneWay}" />
+                <TextBlock Text="{Binding CustomCursorDisplay, Mode=OneWay}" VerticalAlignment="Center" Margin="6,0,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12" />
+            </StackPanel>
+        </controls:OptionControl>
+
         <ui:Button Margin="0,16,0,0" Icon="ArrowReset24" Content="Reset to Default" Appearance="Danger" HorizontalAlignment="Stretch" Command="{Binding ResetModsCommand}" />
     </StackPanel>
 </ui:UiPage>

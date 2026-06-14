@@ -44,7 +44,7 @@ namespace Rystrap.Models.Persistable
 
         // launch options
         public LaunchOptions LaunchOptions { get; set; } = new();
-        public bool MultiInstanceEnabled { get; set; } = false;
+        public bool MultiInstanceEnabled { get; set; } = true;
 
         // discord rich presence
         public EnhancedPresenceConfig EnhancedDiscordPresence { get; set; } = new();

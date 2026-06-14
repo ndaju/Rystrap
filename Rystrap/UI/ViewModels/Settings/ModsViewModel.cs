@@ -19,6 +19,7 @@ namespace Rystrap.UI.ViewModels.Settings
         private string _customJumpSoundDisplay = "";
         private string _customDeathSoundDisplay = "";
         private string _customWalkSoundDisplay = "";
+        private string _customCursorDisplay = "";
 
         public string CustomJumpSoundDisplay
         {
@@ -46,6 +47,8 @@ namespace Rystrap.UI.ViewModels.Settings
         public ICommand ClearJumpSoundCommand => new RelayCommand(ClearJumpSound);
         public ICommand ClearDeathSoundCommand => new RelayCommand(ClearDeathSound);
         public ICommand ClearWalkSoundCommand => new RelayCommand(ClearWalkSound);
+        public ICommand BrowseCustomCursorCommand => new RelayCommand(BrowseCustomCursor);
+        public ICommand ClearCustomCursorCommand => new RelayCommand(ClearCustomCursor);
 
         private void BrowseJumpSound()
         {
@@ -85,15 +88,38 @@ namespace Rystrap.UI.ViewModels.Settings
         private void ClearDeathSound() { App.Settings.Prop.CustomDeathSoundPath = ""; CustomDeathSoundDisplay = ""; OnPropertyChanged(nameof(HasCustomDeathSound)); OnPropertyChanged(nameof(ShowClearDeathSound)); }
         private void ClearWalkSound() { App.Settings.Prop.CustomWalkSoundPath = ""; CustomWalkSoundDisplay = ""; OnPropertyChanged(nameof(HasCustomWalkSound)); OnPropertyChanged(nameof(ShowClearWalkSound)); }
 
+        private void BrowseCustomCursor()
+        {
+            var dialog = new OpenFileDialog { Filter = "Cursor Files (*.cur;*.png)|*.cur;*.png|Image Files (*.png;*.jpg;*.bmp)|*.png;*.jpg;*.bmp|All Files (*.*)|*.*", Title = "Select custom cursor" };
+            if (dialog.ShowDialog() == true)
+            {
+                App.Settings.Prop.CustomCursorPath = dialog.FileName;
+                CustomCursorDisplay = Path.GetFileName(dialog.FileName);
+                OnPropertyChanged(nameof(HasCustomCursor));
+                OnPropertyChanged(nameof(ShowClearCustomCursor));
+            }
+        }
+
+        private void ClearCustomCursor() { App.Settings.Prop.CustomCursorPath = ""; CustomCursorDisplay = ""; OnPropertyChanged(nameof(HasCustomCursor)); OnPropertyChanged(nameof(ShowClearCustomCursor)); }
+
         public Visibility ShowClearJumpSound => HasCustomJumpSound ? Visibility.Visible : Visibility.Collapsed;
         public Visibility ShowClearDeathSound => HasCustomDeathSound ? Visibility.Visible : Visibility.Collapsed;
         public Visibility ShowClearWalkSound => HasCustomWalkSound ? Visibility.Visible : Visibility.Collapsed;
+
+        public string CustomCursorDisplay
+        {
+            get => _customCursorDisplay;
+            set { _customCursorDisplay = value; OnPropertyChanged(nameof(CustomCursorDisplay)); }
+        }
+        public bool HasCustomCursor => !string.IsNullOrEmpty(App.Settings.Prop.CustomCursorPath);
+        public Visibility ShowClearCustomCursor => HasCustomCursor ? Visibility.Visible : Visibility.Collapsed;
 
         public ModsViewModel()
         {
             CustomJumpSoundDisplay = !string.IsNullOrEmpty(App.Settings.Prop.CustomJumpSoundPath) ? Path.GetFileName(App.Settings.Prop.CustomJumpSoundPath) : "";
             CustomDeathSoundDisplay = !string.IsNullOrEmpty(App.Settings.Prop.CustomDeathSoundPath) ? Path.GetFileName(App.Settings.Prop.CustomDeathSoundPath) : "";
             CustomWalkSoundDisplay = !string.IsNullOrEmpty(App.Settings.Prop.CustomWalkSoundPath) ? Path.GetFileName(App.Settings.Prop.CustomWalkSoundPath) : "";
+            CustomCursorDisplay = !string.IsNullOrEmpty(App.Settings.Prop.CustomCursorPath) ? Path.GetFileName(App.Settings.Prop.CustomCursorPath) : "";
         }
 
         private void OpenModsFolder() => Process.Start("explorer.exe", Paths.Modifications);
@@ -175,6 +201,7 @@ namespace Rystrap.UI.ViewModels.Settings
             ClearJumpSound();
             ClearDeathSound();
             ClearWalkSound();
+            ClearCustomCursor();
 
             // clear custom font
             if (!string.IsNullOrEmpty(TextFontTask.NewState))

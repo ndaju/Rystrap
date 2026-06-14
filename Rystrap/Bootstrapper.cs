@@ -85,6 +85,9 @@ namespace Rystrap
         {
             _launchMode = launchMode;
 
+            if (App.Settings.Prop.MultiInstanceEnabled && !_launchCommandLine.Contains("-multi", StringComparison.OrdinalIgnoreCase))
+                _launchCommandLine = $"-multi {_launchCommandLine}";
+
             // https://github.com/icsharpcode/SharpZipLib/blob/master/src/ICSharpCode.SharpZipLib/Zip/FastZip.cs/#L669-L680
             // exceptions don't get thrown if we define events without actually binding to the failure events. probably a bug. ¯\_(ツ)_/¯
             _fastZipEvents.FileFailure += (_, e) =>
