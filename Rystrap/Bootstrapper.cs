@@ -85,7 +85,7 @@ namespace Rystrap
         {
             _launchMode = launchMode;
 
-            if (App.Settings.Prop.MultiInstanceEnabled && !_launchCommandLine.Contains("-multi", StringComparison.OrdinalIgnoreCase))
+            if (App.Settings.Prop.LaunchOptions.MultiInstanceEnabled && !_launchCommandLine.Contains("-multi", StringComparison.OrdinalIgnoreCase))
                 _launchCommandLine = $"-multi {_launchCommandLine}";
 
             // https://github.com/icsharpcode/SharpZipLib/blob/master/src/ICSharpCode.SharpZipLib/Zip/FastZip.cs/#L669-L680
