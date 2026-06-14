@@ -66,6 +66,7 @@ namespace Rystrap
         private bool _noConnection = false;
 
         private AsyncMutex? _mutex;
+        private static Mutex? _robloxSingletonMutex;
 
         private int _appPid = 0;
 
@@ -85,8 +86,21 @@ namespace Rystrap
         {
             _launchMode = launchMode;
 
-            if (App.Settings.Prop.LaunchOptions.MultiInstanceEnabled && !_launchCommandLine.Contains("-multi", StringComparison.OrdinalIgnoreCase))
-                _launchCommandLine = $"-multi {_launchCommandLine}";
+            if (App.Settings.Prop.LaunchOptions.MultiInstanceEnabled)
+            {
+                if (!_launchCommandLine.Contains("-multi", StringComparison.OrdinalIgnoreCase))
+                    _launchCommandLine = $"-multi {_launchCommandLine}";
+
+                try
+                {
+                    _robloxSingletonMutex = new Mutex(true, "ROBLOX_singletonMutex");
+                    App.Logger.WriteLine("Bootstrapper", "Acquired ROBLOX_singletonMutex for multi-instance");
+                }
+                catch (Exception ex)
+                {
+                    App.Logger.WriteException("Bootstrapper", ex);
+                }
+            }
 
             // https://github.com/icsharpcode/SharpZipLib/blob/master/src/ICSharpCode.SharpZipLib/Zip/FastZip.cs/#L669-L680
             // exceptions don't get thrown if we define events without actually binding to the failure events. probably a bug. ¯\_(ツ)_/¯
