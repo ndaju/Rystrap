@@ -62,7 +62,7 @@ You need the [.NET 6 Desktop Runtime](https://aka.ms/dotnet-core-applaunch?missi
 ## Building
 
 ```
-git clone --recurse-submodules https://github.com/ndaju/Rystrap.git
+git clone https://github.com/ndaju/Rystrap.git
 cd Rystrap
 dotnet build Rystrap/Rystrap.csproj -c Release
 ```
