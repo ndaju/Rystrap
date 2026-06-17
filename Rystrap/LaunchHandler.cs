@@ -226,18 +226,21 @@ namespace Rystrap
                 App.Terminate(ErrorCode.ERROR_FILE_NOT_FOUND);
             }
 
-            if (App.Settings.Prop.ConfirmLaunches && !App.Settings.Prop.LaunchOptions.MultiInstanceEnabled && launchMode != LaunchMode.Studio && Mutex.TryOpenExisting("ROBLOX_singletonMutex", out var _))
+            if (App.Settings.Prop.ConfirmLaunches && !App.Settings.Prop.LaunchOptions.MultiInstanceEnabled && launchMode != LaunchMode.Studio && Mutex.TryOpenExisting("ROBLOX_singletonMutex", out var existingMutex))
             {
-                // this currently doesn't work very well since it relies on checking the existence of the singleton mutex
-                // which often hangs around for a few seconds after the window closes
-                // it would be better to have this rely on the activity tracker when we implement IPC in the planned refactoring
-
-                var result = Frontend.ShowMessageBox(Strings.Bootstrapper_ConfirmLaunch, MessageBoxImage.Warning, MessageBoxButton.YesNo);
-
-                if (result != MessageBoxResult.Yes)
+                using (existingMutex)
                 {
-                    App.Terminate();
-                    return;
+                    // this currently doesn't work very well since it relies on checking the existence of the singleton mutex
+                    // which often hangs around for a few seconds after the window closes
+                    // it would be better to have this rely on the activity tracker when we implement IPC in the planned refactoring
+
+                    var result = Frontend.ShowMessageBox(Strings.Bootstrapper_ConfirmLaunch, MessageBoxImage.Warning, MessageBoxButton.YesNo);
+
+                    if (result != MessageBoxResult.Yes)
+                    {
+                        App.Terminate();
+                        return;
+                    }
                 }
             }
 
@@ -307,11 +310,14 @@ namespace Rystrap
             if (selected != true || dialog.SelectedAccount is null)
             {
                 App.Logger.WriteLine(LOG_IDENT, "Continuing without selected account");
+                App.SelectedAccountCookie = null;
                 return;
             }
 
             App.State.Prop.LastSelectedAccountId = dialog.SelectedAccount.Id;
             App.State.Save();
+
+            App.SelectedAccountCookie = dialog.SelectedAccount.RobloxCookie;
 
             App.Logger.WriteLine(LOG_IDENT, $"Selected account: {dialog.SelectedAccount.DisplayText}");
         }

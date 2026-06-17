@@ -43,14 +43,20 @@ namespace Rystrap.Integrations
             _rpcClient.OnConnectionEstablished += (_, e) =>
                 App.Logger.WriteLine(LOG_IDENT, "Established connection with Discord RPC");
 
-            //spams log as it tries to connect every ~15 sec when discord is closed so not now
-            //_rpcClient.OnConnectionFailed += (_, e) =>
-            //    App.Logger.WriteLine(LOG_IDENT, "Failed to establish connection with Discord RPC");
+            _rpcClient.OnConnectionFailed += (_, e) =>
+                App.Logger.WriteLine(LOG_IDENT, "Failed to establish connection with Discord RPC");
 
             _rpcClient.OnClose += (_, e) =>
                 App.Logger.WriteLine(LOG_IDENT, $"Lost connection to Discord RPC - {e.Reason} ({e.Code})");
 
-            _rpcClient.Initialize();
+            try
+            {
+                _rpcClient.Initialize();
+            }
+            catch (Exception ex)
+            {
+                App.Logger.WriteException(LOG_IDENT, ex);
+            }
         }
 
         public void ProcessRPCMessage(Message message, bool implicitUpdate = true)
@@ -173,6 +179,7 @@ namespace Rystrap.Integrations
             if (_fetchThumbnailsToken != null)
             {
                 _fetchThumbnailsToken.Cancel();
+                _fetchThumbnailsToken.Dispose();
                 _fetchThumbnailsToken = null;
             }
 
@@ -304,8 +311,23 @@ namespace Rystrap.Integrations
 
             if (_smallImgBeingFetched != null || _largeImgBeingFetched != null)
             {
+                _fetchThumbnailsToken?.Dispose();
                 _fetchThumbnailsToken = new CancellationTokenSource();
-                Task.Run(() => UpdatePresenceIconsAsync(_smallImgBeingFetched, _largeImgBeingFetched, implicitUpdate, _fetchThumbnailsToken.Token));
+                var token = _fetchThumbnailsToken.Token;
+                var smallId = _smallImgBeingFetched;
+                var largeId = _largeImgBeingFetched;
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        await UpdatePresenceIconsAsync(smallId, largeId, implicitUpdate, token);
+                    }
+                    catch (OperationCanceledException) { }
+                    catch (Exception ex)
+                    {
+                        App.Logger.WriteException("DiscordRichPresence::UpdatePresenceIconsAsync", ex);
+                    }
+                }, token);
             }
         }
 
@@ -361,7 +383,8 @@ namespace Rystrap.Integrations
                 catch (Exception ex)
                 {
                     App.Logger.WriteException(LOG_IDENT, ex);
-                    Frontend.ShowMessageBox($"{Strings.ActivityWatcher_RichPresenceLoadFailed}\n\n{ex.Message}", MessageBoxImage.Warning);
+                    Application.Current.Dispatcher.Invoke(() =>
+                        Frontend.ShowMessageBox($"{Strings.ActivityWatcher_RichPresenceLoadFailed}\n\n{ex.Message}", MessageBoxImage.Warning));
                     return false;
                 }
 
@@ -374,10 +397,16 @@ namespace Rystrap.Integrations
 
             if (App.Settings.Prop.ShowAccountOnRichPresence)
             {
-                var userDetails = await UserDetails.Fetch(activity.UserId);
-
-                smallImage = userDetails.Thumbnail.ImageUrl!;
-                smallImageText = $"Playing on {userDetails.Data.DisplayName} (@{userDetails.Data.Name})"; // i.e. "axell (@Axelan_se)"
+                try
+                {
+                    var userDetails = await UserDetails.Fetch(activity.UserId);
+                    smallImage = userDetails.Thumbnail.ImageUrl ?? smallImage;
+                    smallImageText = $"Playing on {userDetails.Data.DisplayName} (@{userDetails.Data.Name})";
+                }
+                catch (Exception ex)
+                {
+                    App.Logger.WriteException(LOG_IDENT, ex);
+                }
             }
 
             if (!_activityWatcher.InGame || placeId != activity.PlaceId)

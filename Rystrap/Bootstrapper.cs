@@ -620,6 +620,14 @@ namespace Rystrap
                 logCreatedEvent.Set();
             };
 
+            // inject selected account cookie before launching
+            if (!string.IsNullOrEmpty(App.SelectedAccountCookie))
+            {
+                App.Logger.WriteLine(LOG_IDENT, "Injecting selected account cookie");
+                Utilities.InjectRobloxCookie(App.SelectedAccountCookie);
+                App.SelectedAccountCookie = null;
+            }
+
             // v2.2.0 - byfron will trip if we keep a process handle open for over a minute, so we're doing this now
             try
             {

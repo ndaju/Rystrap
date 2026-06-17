@@ -38,6 +38,8 @@ namespace Rystrap
 
         public static Bootstrapper? Bootstrapper { get; set; } = null!;
 
+        public static string? SelectedAccountCookie { get; set; } = null;
+
         public static bool IsActionBuild => !String.IsNullOrEmpty(BuildMetadata.CommitRef);
 
         public static bool IsProductionBuild => IsActionBuild && BuildMetadata.CommitRef.StartsWith("tag", StringComparison.Ordinal);

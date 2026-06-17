@@ -1,10 +1,49 @@
-﻿using Rystrap.AppData;
+﻿using System.Runtime.InteropServices;
+using Rystrap.AppData;
 using System.ComponentModel;
 
 namespace Rystrap
 {
     static class Utilities
     {
+        [DllImport("wininet.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool InternetSetCookie(string lpszUrl, string lpszCookieName, string lpszCookieData);
+
+        public static void InjectRobloxCookie(string cookieValue)
+        {
+            if (string.IsNullOrEmpty(cookieValue))
+                return;
+
+            // clear existing cookie first
+            InternetSetCookie("https://www.roblox.com", ".ROBLOSECURITY", "; expires=Thu, 01 Jan 1970 00:00:00 GMT");
+
+            // set new cookie
+            string cookieData = $"{cookieValue}; path=/; domain=.roblox.com; secure; httponly";
+            InternetSetCookie("https://www.roblox.com", ".ROBLOSECURITY", cookieData);
+
+            // also clear Chromium/WebView2 cookie stores so Roblox picks up the new cookie
+            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string[] cookiePaths = new[]
+            {
+                Path.Combine(localAppData, "Roblox", "Cookies"),
+                Path.Combine(localAppData, "Roblox", "Local Storage", "leveldb"),
+                Path.Combine(localAppData, "Packages", "ROBLOXCORPORATION.ROBLOX_55nm5eh3cm0pr", "LocalCache", "Roblox", "Cookies"),
+                Path.Combine(localAppData, "Packages", "ROBLOXCORPORATION.ROBLOX_55nm5eh3cm0pr", "LocalCache", "Roblox", "Local Storage", "leveldb"),
+            };
+
+            foreach (string path in cookiePaths)
+            {
+                try
+                {
+                    if (Directory.Exists(path))
+                        Directory.Delete(path, true);
+                    else if (File.Exists(path))
+                        File.Delete(path);
+                }
+                catch { }
+            }
+        }
+
         public static void ShellExecute(string website)
         {
             try

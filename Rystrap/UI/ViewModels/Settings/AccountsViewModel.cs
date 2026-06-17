@@ -248,6 +248,7 @@ namespace Rystrap.UI.ViewModels.Settings
         private void QuickSwitch()
         {
             if (SelectedAccount is null) return;
+            Utilities.InjectRobloxCookie(SelectedAccount.RobloxCookie);
             Utilities.ShellExecute("roblox://placeId=1");
         }
 
